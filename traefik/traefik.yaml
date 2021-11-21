@@ -1,0 +1,37 @@
+providers:
+  docker:
+    exposedByDefault: false
+
+  file:
+    directory: /traefik/dynamic/
+    watch: true
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: lets-encrypt
+
+  minecraft:
+    address: ":25565"
+
+certificatesResolvers:
+  lets-encrypt:
+    acme:
+      email: timothy.john.schwab@gmail.com
+      storage: /traefik/secrets/lets-encrypt.json
+      tlsChallenge: {}
+#      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+
+api:
+  dashboard: true

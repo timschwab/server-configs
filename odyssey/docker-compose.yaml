@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  prod:
+    container_name: odyssey-prod
+    build:
+      context: /projects/odyssey/prod/repo
+    restart: unless-stopped
+    environment:
+      - JAVA_MEMORY_MAX=6G
+      - JAVA_MEMORY_MIN=2G
+    ports:
+      - "25565:25565"
+
+    volumes:
+      - "/projects/odyssey/prod/data/worlds:/odyssey/worlds"
+      - "/projects/odyssey/prod/repo/dynmap:/odyssey/plugins/dynmap"
+      - "/projects/odyssey/prod/repo/paper-configs:/odyssey/configs"
+      - "/projects/odyssey/prod/repo/plugin-configs/mv-core:/odyssey/plugins/Multiverse-Core"
+      - "/projects/odyssey/prod/repo/plugin-configs/mv-portals:/odyssey/plugins/Multiverse-Portals"
+      - "/projects/odyssey/prod/repo/plugin-configs/mv-inventories:/odyssey/plugins/Multiverse-Inventories"
+    
+    networks:
+      - odyssey
+    
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.odysseyProd.rule: "Host(`odyssey.town`)"
+      traefik.http.routers.odysseyProd.entrypoints: "websecure"
+      traefik.docker.network: "odyssey"    
+
+networks:
+  odyssey:
+    external: true

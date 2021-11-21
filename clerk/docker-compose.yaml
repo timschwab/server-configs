@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: clerk-web
+    build:
+      context: /projects/clerk/web/repo
+    restart: unless-stopped
+
+    networks:
+      - clerk
+
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.clerkWeb.rule: "Host(`clerk.finance`)"
+      traefik.http.routers.clerkWeb.entrypoints: "websecure"
+      traefik.docker.network: "clerk"
+
+networks:
+  clerk:
+    external: true

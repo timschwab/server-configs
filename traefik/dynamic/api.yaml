@@ -1,0 +1,14 @@
+http:
+  middlewares:
+    basic-auth:
+      basicAuth:
+        usersFile: "/traefik/secrets/dashboard-users"
+
+  routers:
+    api:
+      rule: "Host(`dashboard.tim-schwab.com`)"
+      service: api@internal
+      entrypoints:
+        - websecure
+      middlewares:
+        - basic-auth
