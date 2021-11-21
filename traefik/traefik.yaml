@@ -22,8 +22,11 @@ entryPoints:
       tls:
         certResolver: lets-encrypt
 
-  minecraft:
+  minecraft-prod:
     address: ":25565"
+
+  minecraft-dev:
+    address: ":25566"
 
 certificatesResolvers:
   lets-encrypt:

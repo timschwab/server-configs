@@ -15,6 +15,8 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 25565:25565
+      - 25566:25566
 
     networks:
       - clerk

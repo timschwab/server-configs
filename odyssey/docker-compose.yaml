@@ -9,8 +9,6 @@ services:
     environment:
       - JAVA_MEMORY_MAX=6G
       - JAVA_MEMORY_MIN=2G
-    ports:
-      - "25565:25565"
 
     volumes:
       - "/projects/odyssey/prod/data/worlds:/odyssey/worlds"
@@ -25,9 +23,47 @@ services:
     
     labels:
       traefik.enable: "true"
-      traefik.http.routers.odysseyProd.rule: "Host(`odyssey.town`)"
-      traefik.http.routers.odysseyProd.entrypoints: "websecure"
-      traefik.docker.network: "odyssey"    
+      traefik.docker.network: "odyssey"
+
+      traefik.http.routers.odysseyProdWeb.rule: Host(`odyssey.town`)
+      traefik.http.routers.odysseyProdWeb.entrypoints: websecure
+
+      traefik.tcp.services.odysseyProd.loadbalancer.server.port: 25565
+      traefik.tcp.routers.odysseyProdMc.entrypoints: minecraft-prod
+      traefik.tcp.routers.odysseyProdMc.service: odysseyProd
+      traefik.tcp.routers.odysseyProdMc.rule: HostSNI(`*`)
+
+  dev:
+    container_name: odyssey-dev
+    build:
+      context: /projects/odyssey/dev/repo
+    restart: unless-stopped
+    environment:
+      - JAVA_MEMORY_MAX=2G
+      - JAVA_MEMORY_MIN=1G
+
+    volumes:
+      - "/projects/odyssey/dev/data/worlds:/odyssey/worlds"
+      - "/projects/odyssey/dev/repo/dynmap:/odyssey/plugins/dynmap"
+      - "/projects/odyssey/dev/repo/paper-configs:/odyssey/configs"
+      - "/projects/odyssey/dev/repo/plugin-configs/mv-core:/odyssey/plugins/Multiverse-Core"
+      - "/projects/odyssey/dev/repo/plugin-configs/mv-portals:/odyssey/plugins/Multiverse-Portals"
+      - "/projects/odyssey/dev/repo/plugin-configs/mv-inventories:/odyssey/plugins/Multiverse-Inventories"
+    
+    networks:
+      - odyssey
+    
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "odyssey"
+
+      traefik.http.routers.odysseyDevWeb.rule: Host(`dev.odyssey.town`)
+      traefik.http.routers.odysseyDevWeb.entrypoints: websecure
+
+      traefik.tcp.services.odysseyDev.loadbalancer.server.port: 25565
+      traefik.tcp.routers.odysseyDevMc.entrypoints: minecraft-dev
+      traefik.tcp.routers.odysseyDevMc.service: odysseyDev
+      traefik.tcp.routers.odysseyDevMc.rule: HostSNI(`*`)
 
 networks:
   odyssey:
