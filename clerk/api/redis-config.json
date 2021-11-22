@@ -1,0 +1,5 @@
+{
+	"socket": {
+		"host": "clerk-redis"
+	}
+}

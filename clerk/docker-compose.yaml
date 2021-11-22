@@ -11,11 +11,42 @@ services:
       - clerk
 
     labels:
-      traefik.enable: "true"
-      traefik.http.routers.clerkWeb.rule: "Host(`clerk.finance`)"
-      traefik.http.routers.clerkWeb.entrypoints: "websecure"
-      traefik.docker.network: "clerk"
+      traefik.enable: true
+      traefik.docker.network: clerk
+      traefik.http.routers.clerkWeb.rule: Host(`clerk.finance`)
+      traefik.http.routers.clerkWeb.entrypoints: websecure
+
+  api:
+    container_name: clerk-api
+    build:
+      context: /projects/clerk/api/repo
+    restart: unless-stopped
+
+    volumes:
+      - "/projects/configs/clerk/api:/clerk/configs"
+
+    networks:
+      - clerk
+      - clerk-internal
+
+    labels:
+      traefik.enable: true
+      traefik.docker.network: clerk
+      traefik.http.routers.clerkApi.rule: Host(`api.clerk.finance`)
+      traefik.http.routers.clerkApi.entrypoints: websecure
+
+  redis:
+    container_name: clerk-redis
+    image: redis:6.2
+    restart: unless-stopped
+
+    volumes:
+      - "/projects/clerk/api/data/redis:/data"
+
+    networks:
+      - clerk-internal
 
 networks:
   clerk:
     external: true
+  clerk-internal:
