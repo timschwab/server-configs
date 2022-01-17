@@ -45,7 +45,7 @@ services:
 
     volumes:
       - "/projects/odyssey/dev/data/worlds:/odyssey/worlds"
-      - "/projects/odyssey/dev/data/backups:/odyssey/backups"
+#      - "/projects/odyssey/dev/data/backups:/odyssey/backups"
       - "/projects/odyssey/dev/repo/dynmap:/odyssey/plugins/dynmap"
       - "/projects/odyssey/dev/repo/paper-configs:/odyssey/configs"
       - "/projects/odyssey/dev/repo/plugin-configs/mv-core:/odyssey/plugins/Multiverse-Core"
