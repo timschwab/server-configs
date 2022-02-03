@@ -13,6 +13,7 @@ services:
     volumes:
       - "/projects/odyssey/prod/data/worlds:/odyssey/worlds"
       - "/projects/odyssey/prod/data/backups:/odyssey/backups"
+      - "/projects/odyssey/prod/data/logs:/odyssey/logs"
       - "/projects/odyssey/prod/repo/dynmap:/odyssey/plugins/dynmap"
       - "/projects/odyssey/prod/repo/paper-configs:/odyssey/configs"
       - "/projects/odyssey/prod/repo/plugin-configs/mv-core:/odyssey/plugins/Multiverse-Core"
@@ -46,6 +47,7 @@ services:
     volumes:
       - "/projects/odyssey/dev/data/worlds:/odyssey/worlds"
 #      - "/projects/odyssey/dev/data/backups:/odyssey/backups"
+      - "/projects/odyssey/dev/data/logs:/odyssey/logs"
       - "/projects/odyssey/dev/repo/dynmap:/odyssey/plugins/dynmap"
       - "/projects/odyssey/dev/repo/paper-configs:/odyssey/configs"
       - "/projects/odyssey/dev/repo/plugin-configs/mv-core:/odyssey/plugins/Multiverse-Core"
