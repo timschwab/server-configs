@@ -5,6 +5,8 @@ services:
     container_name: odyssey-prod
     build:
       context: /projects/odyssey/prod/repo
+      args:
+        username: pyzaist
     restart: unless-stopped
     environment:
       - JAVA_MEMORY_MAX=6G
@@ -39,6 +41,8 @@ services:
     container_name: odyssey-dev
     build:
       context: /projects/odyssey/dev/repo
+      args:
+        username: pyzaist
     restart: unless-stopped
     environment:
       - JAVA_MEMORY_MAX=2G
