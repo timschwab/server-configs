@@ -7,12 +7,14 @@ services:
       context: /projects/odyssey/prod/repo
       args:
         username: pyzaist
+        s3_bucket: "odyssey-minecraft-prod"
     restart: unless-stopped
     environment:
       - JAVA_MEMORY_MAX=6G
       - JAVA_MEMORY_MIN=2G
 
     volumes:
+      - "/projects/secrets/odyssey/aws-credentials:/home/pyzaist/.aws/credentials"
       - "/projects/odyssey/prod/data/worlds:/odyssey/worlds"
       - "/projects/odyssey/prod/data/backups:/odyssey/backups"
       - "/projects/odyssey/prod/data/logs:/odyssey/logs"
@@ -43,14 +45,16 @@ services:
       context: /projects/odyssey/dev/repo
       args:
         username: pyzaist
+        s3_bucket: "odyssey-minecraft-dev"
     restart: unless-stopped
     environment:
       - JAVA_MEMORY_MAX=2G
       - JAVA_MEMORY_MIN=1G
 
     volumes:
+      - "/projects/secrets/odyssey/aws-credentials:/home/pyzaist/.aws/credentials"
       - "/projects/odyssey/dev/data/worlds:/odyssey/worlds"
-#      - "/projects/odyssey/dev/data/backups:/odyssey/backups"
+      - "/projects/odyssey/dev/data/backups:/odyssey/backups"
       - "/projects/odyssey/dev/data/logs:/odyssey/logs"
       - "/projects/odyssey/dev/repo/dynmap:/odyssey/plugins/dynmap"
       - "/projects/odyssey/dev/repo/paper-configs:/odyssey/configs"
