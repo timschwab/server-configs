@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: chesswar-api
+    build:
+      context: /projects/chesswar/api/repo
+    restart: unless-stopped
+
+    networks:
+      - chesswar
+      - chesswar-internal
+
+    labels:
+      traefik.enable: true
+      traefik.docker.network: chesswar
+      traefik.http.routers.chesswarApi.rule: Host(`api.chesswar.io`)
+      traefik.http.routers.chesswarApi.entrypoints: websecure
+
+  web:
+    container_name: chesswar-web
+    build:
+      context: /projects/chesswar/web/repo
+    restart: unless-stopped
+
+    networks:
+      - chesswar
+
+    labels:
+      traefik.enable: true
+      traefik.docker.network: chesswar
+      traefik.http.routers.chesswarWeb.rule: Host(`chesswar.io`)
+      traefik.http.routers.chesswarWeb.entrypoints: websecure
+
+networks:
+  chesswar:
+    external: true
+  chesswar-internal:
