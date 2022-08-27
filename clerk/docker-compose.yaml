@@ -24,6 +24,7 @@ services:
 
     volumes:
       - "/projects/configs/clerk/api:/clerk/configs"
+      - "/projects/clerk/api/data/custom:/clerk/data"
 
     networks:
       - clerk
