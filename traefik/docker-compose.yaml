@@ -21,9 +21,12 @@ services:
     networks:
       - clerk
       - odyssey
+      - chesswar
 
 networks:
   clerk:
     external: true
   odyssey:
+    external: true
+  chesswar:
     external: true
