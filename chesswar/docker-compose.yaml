@@ -4,7 +4,8 @@ services:
   api:
     container_name: chesswar-api
     build:
-      context: /projects/chesswar/api/repo
+      context: /projects/chesswar/prod/repo
+      dockerfile: Dockerfile-api
     restart: unless-stopped
 
     networks:
@@ -20,7 +21,8 @@ services:
   web:
     container_name: chesswar-web
     build:
-      context: /projects/chesswar/web/repo
+      context: /projects/chesswar/prod/repo
+      dockerfile: Dockerfile-web
     restart: unless-stopped
 
     networks:

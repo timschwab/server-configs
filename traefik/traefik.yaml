@@ -34,7 +34,6 @@ certificatesResolvers:
       email: timothy.john.schwab@gmail.com
       storage: /traefik/secrets/lets-encrypt.json
       tlsChallenge: {}
-#      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 
 api:
   dashboard: true
