@@ -21,12 +21,15 @@ services:
     networks:
       - clerk
       - odyssey
-      - chesswar
+      - chesswar-prod
+      - chesswar-dev
 
 networks:
   clerk:
     external: true
   odyssey:
     external: true
-  chesswar:
+  chesswar-prod:
+    external: true
+  chesswar-dev:
     external: true

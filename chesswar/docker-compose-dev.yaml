@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  api-dev:
+    container_name: chesswar-api-dev
+    image: chesswar-api-dev
+    build:
+      context: /projects/chesswar/dev/repo
+      dockerfile: Dockerfile-api
+    restart: unless-stopped
+
+    networks:
+      - chesswar-dev
+      - chesswar-internal-dev
+
+    labels:
+      traefik.enable: true
+      traefik.docker.network: chesswar-dev
+      traefik.http.routers.chesswarApiDev.rule: Host(`api.chesswar.dev`)
+      traefik.http.routers.chesswarApiDev.entrypoints: websecure
+
+  web-dev:
+    container_name: chesswar-web-dev
+    image: chesswar-web-dev
+    build:
+      context: /projects/chesswar/dev/repo
+      dockerfile: Dockerfile-web
+    restart: unless-stopped
+
+    networks:
+      - chesswar-dev
+
+    labels:
+      traefik.enable: true
+      traefik.docker.network: chesswar-dev
+      traefik.http.routers.chesswarWebDev.rule: Host(`chesswar.dev`)
+      traefik.http.routers.chesswarWebDev.entrypoints: websecure
+
+networks:
+  chesswar-dev:
+    external: true
+  chesswar-internal-dev:
+    external: false
