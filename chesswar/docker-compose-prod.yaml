@@ -1,9 +1,8 @@
-version: "3.8"
+name: chesswar-prod
 
 services:
-  api-prod:
-    container_name: chesswar-api-prod
-    image: chesswar-api-prod
+  api:
+    container_name: chesswar-prod-api
     build:
       context: /projects/chesswar/prod/repo
       dockerfile: Dockerfile-api
@@ -11,7 +10,7 @@ services:
 
     networks:
       - chesswar-prod
-      - chesswar-internal-prod
+      - chesswar-prod-internal
 
     labels:
       traefik.enable: true
@@ -19,9 +18,8 @@ services:
       traefik.http.routers.chesswarApiProd.rule: Host(`api.chesswar.io`)
       traefik.http.routers.chesswarApiProd.entrypoints: websecure
 
-  web-prod:
-    container_name: chesswar-web-prod
-    image: chesswar-web-prod
+  web:
+    container_name: chesswar-prod-web
     build:
       context: /projects/chesswar/prod/repo
       dockerfile: Dockerfile-web
@@ -39,5 +37,5 @@ services:
 networks:
   chesswar-prod:
     external: true
-  chesswar-internal-prod:
+  chesswar-prod-internal:
     external: false
