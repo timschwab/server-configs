@@ -4,7 +4,7 @@ services:
   api:
     container_name: chesswar-dev-api
     build:
-      context: /projects/chesswar/dev/repo
+      context: &repo_path /projects/chesswar/dev/repo
       dockerfile: Dockerfile-api
     restart: unless-stopped
 
@@ -21,7 +21,7 @@ services:
   web:
     container_name: chesswar-dev-web
     build:
-      context: /projects/chesswar/dev/repo
+      context: *repo_path
       dockerfile: Dockerfile-web
     restart: unless-stopped
 
