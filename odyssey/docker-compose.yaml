@@ -8,7 +8,7 @@ services:
       args:
         username: pyzaist
         s3_bucket: "odyssey-minecraft-prod"
-    restart: unless-stopped
+    restart: no
     environment:
       - JAVA_MEMORY_MAX=6G
       - JAVA_MEMORY_MIN=2G
@@ -46,7 +46,7 @@ services:
       args:
         username: pyzaist
         s3_bucket: "odyssey-minecraft-dev"
-    restart: unless-stopped
+    restart: no
     environment:
       - JAVA_MEMORY_MAX=2G
       - JAVA_MEMORY_MIN=1G
