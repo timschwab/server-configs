@@ -5,7 +5,7 @@ services:
     container_name: clerk-web
     build:
       context: /projects/clerk/web/repo
-    restart: unless-stopped
+    restart: no
 
     networks:
       - clerk
@@ -20,7 +20,7 @@ services:
     container_name: clerk-api
     build:
       context: /projects/clerk/api/repo
-    restart: unless-stopped
+    restart: no
 
     volumes:
       - "/projects/configs/clerk/api:/clerk/configs"
@@ -39,7 +39,7 @@ services:
   redis:
     container_name: clerk-redis
     image: redis:6.2
-    restart: unless-stopped
+    restart: no
 
     volumes:
       - "/projects/clerk/api/data/redis:/data"
