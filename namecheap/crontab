@@ -1,0 +1,2 @@
+# For reference. To be installed in cron. Runs once every 6 hours.
+0 0,6,12,18 * * * cd /projects/configs/namecheap && node dns-update.js >logs 2>&1
