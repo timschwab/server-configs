@@ -1,0 +1,10 @@
+{
+	"name": "namecheap",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "",
+	"main": "dns-update.js",
+	"scripts": {},
+	"author": "",
+	"license": "none"
+}
